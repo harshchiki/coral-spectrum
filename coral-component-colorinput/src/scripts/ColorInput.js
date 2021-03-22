@@ -324,6 +324,9 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     value = transform.string(value).toLowerCase();
     this._showAlphaInput = validate.enumeration(showAlphaInput)(value) && value || showAlphaInput.ON;
     //this._showOrHideView(this._elements.showAlphaInput, this._showAlphaInput === showAlphaInput.OFF);
+
+    this._elements.propertiesView.setAttribute("alpha", value);
+    this._elements.propertiesView.isAlpha = value;
   }
 
   /**
@@ -696,10 +699,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.overlay.classList.add('_coral-ColorInput-onlyPropertiesView');
     } else if (this._elements.propertiesView.hidden && !this._elements.swatchesView.hidden) {
       this._elements.overlay.classList.add('_coral-ColorInput-onlySwatchesView');
-    }
-
-    if(this._showAlphaInput === showAlphaInput.ON) {
-      this._elements.overlay.classList.remove('_coral-ColorInput-NoAlpha');
     }
 
     // Update accessibility label for colorPreview button when only swatches are shown
