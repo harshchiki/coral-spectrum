@@ -74,6 +74,11 @@ const showSwatches = {
   OFF: 'off'
 };
 
+const showAlphaInput = {
+  ON: 'on',
+  OFF: 'off'
+}
+
 /**
  Enumeration for {@link ColorInput} color properties display options.
 
@@ -309,6 +314,16 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     this._showSwatches = validate.enumeration(showSwatches)(value) && value || showSwatches.ON;
 
     this._showOrHideView(this._elements.swatchesView, this._showSwatches === showSwatches.OFF);
+  }
+
+  getShowAlphaInput() {
+    return this._showAlphaInput || showAlphaInput.ON;
+  }
+
+  set showAlphaInput(value) {
+    value = transform.string(value).toLowerCase();
+    this._showAlphaInput = validate.enumeration(showAlphaInput)(value) && value || showAlphaInput.ON;
+    this._showOrHideView(this._elements.showAlphaInput, this._showAlphaInput === showAlphaInput.OFF);
   }
 
   /**
@@ -683,6 +698,10 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
       this._elements.overlay.classList.add('_coral-ColorInput-onlySwatchesView');
     }
 
+    if(this.showAlphaInput === showAlphaInput.OFF) {
+      this._elements.overlay.classList.add('_coral-ColorInput-onlyRGB');
+    }
+
     // Update accessibility label for colorPreview button when only swatches are shown
     if (this.showProperties === showProperties.OFF &&
       this.showSwatches === showSwatches.ON) {
@@ -848,6 +867,9 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     return showSwatches;
   }
 
+  static get showAlphaInput() {
+    return showAlphaInput;
+  }
   /**
    Returns {@link ColorInput} color properties display options.
 
@@ -871,7 +893,8 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
       autogeneratecolors: 'autoGenerateColors',
       showswatches: 'showSwatches',
       showproperties: 'showProperties',
-      showdefaultcolors: 'showDefaultColors'
+      showdefaultcolors: 'showDefaultColors',
+      showAlphaInput: 'showAlphaInput'
     });
   }
 
