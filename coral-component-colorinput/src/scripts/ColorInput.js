@@ -413,8 +413,17 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
     const newColor = new Color();
     newColor.value = value;
 
+    // switching off requires setting the alpha input, other default is ON
+    if(this._showAlphaInput && this._showAlphaInput === "off") {
+      newColor._alpha = 1;
+    }
+
     if (!newColor.isSimilarTo(oldColor, false)) {
-      this._value = value;
+      if(this._showAlphaInput && this._showAlphaInput === "off") {
+        this._value = newColor._value;
+      } else {
+        this._value = value;
+      }
 
       // make sure right ColorInput.Item is selected even if input field was set by hand
       this._selectColorInputColor(newColor);

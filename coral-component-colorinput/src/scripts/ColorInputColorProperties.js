@@ -218,6 +218,7 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
     }
 
     // if this.isAlpha is undefined, it corresponds to default value - ON
+    // there are better ways to solect the alpha slider - below is only from POC pov
     if (!this.isAlpha || this.isAlpha === "on") {
       this._elements.propertiesSubview.querySelector("._coral-ColorInput-editRgba-group:last-child").classList.remove("_coral-ColorInput-HiddenAlphaSlider");
     }
