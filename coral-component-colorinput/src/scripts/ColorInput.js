@@ -323,9 +323,6 @@ class ColorInput extends BaseFormField(BaseComponent(HTMLElement)) {
   set showAlphaInput(value) {
     value = transform.string(value).toLowerCase();
     this._showAlphaInput = validate.enumeration(showAlphaInput)(value) && value || showAlphaInput.ON;
-    //this._showOrHideView(this._elements.showAlphaInput, this._showAlphaInput === showAlphaInput.OFF);
-
-    this._elements.propertiesView.setAttribute("alpha", value);
     this._elements.propertiesView.isAlpha = value;
   }
 
