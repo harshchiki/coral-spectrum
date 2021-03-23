@@ -217,11 +217,8 @@ class ColorInputColorProperties extends BaseColorInputAbstractSubview(BaseCompon
       subview.remove();
     }
 
-    if (this.isAlpha === "off") {
-
-    }
-
-    if (this.isAlpha === "on") {
+    // if this.isAlpha is undefined, it corresponds to default value - ON
+    if (!this.isAlpha || this.isAlpha === "on") {
       this._elements.propertiesSubview.querySelector("._coral-ColorInput-editRgba-group:last-child").classList.remove("_coral-ColorInput-HiddenAlphaSlider");
     }
     this.appendChild(this._elements.propertiesSubview);
